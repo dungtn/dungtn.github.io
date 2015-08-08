@@ -1,14 +1,15 @@
-{% include site-nav.html %}
+<div class="categories">
 
-  <header class="page-header {% if page.imgclass %}{{ page.imgclass }}{% endif %} {{ page.title }}">
+  <div class="section-heading group">
 
-    <div class="wrap">
+    <h2>Posts {% if page.layout == 'index' %}by category{% else%}in other categories{% endif %}</h2>
 
-      <div class="intro-copy constrained">
-        <h1>{{ page.title }}</h1>
-        {% if page.subhead %}<p class="subhead">{{ page.subhead }}</p>{% endif %}
-      </div>
+  </div>
 
-    </div>
+  <ul class="category-list constrained">
+    {% for category in site.categories %}
+    <li><a href="/writing/{{ category | first }}/">{{ category | first }}</a></li>
+    {% endfor %}
+  </ul>
 
-  </header>
+</div>

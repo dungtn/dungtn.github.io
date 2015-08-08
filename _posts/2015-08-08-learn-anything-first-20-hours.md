@@ -1,6 +1,7 @@
 ---
 layout: blogpost
 title: My "learn anything first 20 hours"
+imgclass: lightbulb
 categories: hobbies
 ---
 ### Deconstruct the skill. Self-correct. Remove barriers to learning. Practice at least 20 hours
