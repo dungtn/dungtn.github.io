@@ -3,4 +3,4 @@ layout: about
 title: About me
 ---
 
-<p class="lead" markdown="1">I’m Dung Thai.</p>
+<p class="lead" markdown="1">Hi! I’m Dung Thai.</p>
