@@ -1,6 +1,6 @@
 ---
 layout: blogpost
-title: My "learn anything first 20 hours"
+title: My "learn anything - first 20 hours"
 imgclass: lightbulb
 categories: hobbies
 ---
