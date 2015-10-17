@@ -8,6 +8,11 @@ body{
   line-height: 1.5;
 }
 
+p {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
 .wrap:before,
 .wrap:after { content:""; display:table; }
 .wrap:after { clear: both; }
