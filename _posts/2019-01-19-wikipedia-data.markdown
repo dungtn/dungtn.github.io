@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Getting Wikipedia data (with an example of extracting Wikipedia tables)."
+title:  "Getting Wikipedia (tables) dataset"
 date:   2019-01-19 00:08:00 +0700
 categories: [dataset]
 ---
@@ -8,7 +8,7 @@ categories: [dataset]
 
 ## Where do I get it?
 
-**Firstly, DON'T crawl data from Wikipedia website.** It will take ages and if you're still not convinced, Wikipedia as a specific section on [why crawlers are bad](https://en.wikipedia.org/wiki/Wikipedia:Database_download#Why_not_just_retrieve_data_from_wikipedia.org_at_runtime?). Instead, Wikipedia lets you [download their database dump ](https://en.wikipedia.org/wiki/Wikipedia:Database_download#Where_do_I_get_it?). So, let's get your hand dirty and download the data from the [torent link](http://itorrents.org/torrent/3A8C87DE09C85193CFBCB10DC64B7A64C2CEE7FC.torrent) (get the first highlighted link if you're not sure). The XML database file is about 64GB after decompressed.
+**Firstly, DON'T crawl data from Wikipedia website.** It will take ages and if you're still not convinced, Wikipedia has a specific section on [why crawlers are bad](https://en.wikipedia.org/wiki/Wikipedia:Database_download#Why_not_just_retrieve_data_from_wikipedia.org_at_runtime?). Instead, Wikipedia lets you [download their database dump ](https://en.wikipedia.org/wiki/Wikipedia:Database_download#Where_do_I_get_it?). So, let's get your hand dirty and download the data from the [torent link](http://itorrents.org/torrent/3A8C87DE09C85193CFBCB10DC64B7A64C2CEE7FC.torrent) (get the first highlighted link if you're not sure). The XML database file is about 64GB after decompressed.
 
 ## Working with Wikipedia XML dumps 
 
