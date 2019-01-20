@@ -1,11 +1,11 @@
 title: ML Revelation
 description: Just another blog about Machine Learning
-author: Dung Thai
+author: Dung (June) Thai
 github: https://github.com/duungtn
-about: ML fangirl.
+about: UMass grad student.
 disqus_shortname: mlrevelation
 google_analytics: UA-XXXXXXXX-Y
-avatar_url: /static/img/avatar.jpg
+avatar_url: /static/img/avatar.png
 
 enableTags: true
 tagarray: []
@@ -19,9 +19,9 @@ social:
     - icon: fa-facebook
       link: "#"
     - icon: fa-twitter
-      link: "https://twitter.com/agusmakmun6"
+      link: "https://twitter.com/dgthai"
     - icon: fa-linkedin
-      link: "https://www.linkedin.com/in/dungthngoc"
+      link: "https://www.linkedin.com/in/dung-thai"
     - icon: fa-stack-exchange
       link: "#"
     - icon: fa-github
@@ -29,7 +29,6 @@ social:
 
 share:
   twitter_username: dungtn
-  fb_appid: 1749788565247320
 
 urls:
     - text: About Me
