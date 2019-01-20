@@ -6,7 +6,6 @@ categories: [dataset]
 ---
 
 
-
 ## Where do I get it?
 
 **Firstly, DON'T crawl data from Wikipedia website.** It will take ages and if you're still not convinced, Wikipedia as a specific section on [why crawlers are bad](https://en.wikipedia.org/wiki/Wikipedia:Database_download#Why_not_just_retrieve_data_from_wikipedia.org_at_runtime?). Instead, Wikipedia lets you [download their database dump ](https://en.wikipedia.org/wiki/Wikipedia:Database_download#Where_do_I_get_it?). So, let's get your hand dirty and download the data from the [torent link](http://itorrents.org/torrent/3A8C87DE09C85193CFBCB10DC64B7A64C2CEE7FC.torrent) (get the first highlighted link if you're not sure). The XML database file is about 64GB after decompressed.
@@ -42,7 +41,7 @@ MWDumpper reads in the XML file and produces the query to insert data into the t
 cat enwiki-20181020-pages-articles-multistream.xml | java -jar mwdumper.jar --format=sql:1.25 | mysql -u <username> -p wiki
 {% endhighlight %}
 
-In my case, I only want to get the content of English articles. Thus, the full command I used was (import the table **text** only)
+In my case, I only want to get the content of English articles. Thus, the full command I used to import the table **text** was
 
 {% highlight shell %}
 cat enwiki-20181020-pages-articles-multistream.xml | java -jar mwdumper.jar --format=sql:1.25 --filter=latest --filter=notalk --filter=namespace:0 | awk '/INSERT INTO text .*/{print}' | | mysql -u <username> -p wiki
@@ -73,9 +72,10 @@ while True:
         for record in rows:
             wikitext = str(record[0], 'utf8')
             # do your things...
+    offset += row_count
 {% endhighlight %}
 
-Wikipedia use a special type of Markdown call WikiText which changes overtime and not backward compatible. There are a bunch of parsers for it but [wikitextparser](https://github.com/5j9/wikitextparser) seems to me the best one for Python. It supports easy parsing and extracting of templates, sections, lists, etc. The example code shows how to extract table and save to CSV files.
+Wikipedia use a special type of Markdown call WikiText which changes overtime and is not backward compatible. There are a bunch of parsers for it but [wikitextparser](https://github.com/5j9/wikitextparser) seems to me the best one for Python. It supports easy parsing and extracting of templates, sections, lists, etc. The example code shows how to extract tables and save them to CSV files.
 
 {% highlight python %}
 import wikitextparser as wtp
