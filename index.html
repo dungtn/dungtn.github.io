@@ -1,45 +1,931 @@
----
-layout: default
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dung (June) Thai, Ph.D. — Generative AI Applied Scientist in Healthcare</title>
+  <meta name="description" content="Dung (June) Thai, Ph.D. is a Generative AI and Applied Scientist specializing in healthcare AI, clinical NLP, hallucination mitigation, RAG systems, and trustworthy LLMs." />
+  <meta name="keywords" content="Generative AI, Applied Scientist, Healthcare AI, Clinical NLP, LLM, RAG, Hallucination Detection, Medical AI, AI Research Scientist, RLHF, DPO" />
+  <meta name="author" content="Dung (June) Thai" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <link rel="canonical" href="https://dungtn.github.io/" />
 
-<div id="home">
-  <h1>{{ site.title }}</h1>
-  <hr />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Dung (June) Thai, Ph.D. — Generative AI Applied Scientist in Healthcare" />
+  <meta property="og:description" content="Generative AI and Applied Scientist with 8+ years building production healthcare AI systems, clinical NLP, and trustworthy LLM pipelines." />
+  <meta property="og:url" content="https://dungtn.github.io/" />
+  <meta property="og:image" content="https://dungtn.github.io/photo.png" />
+  <meta property="og:site_name" content="Dung (June) Thai" />
 
-  <ol class="posts">
-    {% for post in paginator.posts %}
-      <li><a href="{{ post.url }}">{{ post.title }}</a> &raquo; <i><span>{{ post.date | date_to_string }}</span></i></li>
-    {% endfor %}
-  </ol>
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Dung (June) Thai, Ph.D. — Generative AI Applied Scientist in Healthcare" />
+  <meta name="twitter:description" content="Generative AI and Applied Scientist focused on healthcare AI, clinical NLP, and trustworthy LLM systems." />
+  <meta name="twitter:image" content="https://dungtn.github.io/photo.png" />
 
-  <!-- Pagination links -->
-  {% if paginator.total_pages > 1 %}
-    <ul class="pagination pagination-sm">
-      {% if paginator.previous_page %}
-        <li><a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo;</a></li>
-      {% else %}
-        <li class="disabled"><span aria-hidden="true">&laquo;</span></li>
-      {% endif %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Dung (June) Thai",
+    "honorificSuffix": "Ph.D.",
+    "jobTitle": "Staff Research Scientist",
+    "description": "Generative AI and Applied Scientist specializing in healthcare AI, clinical NLP, hallucination mitigation, and trustworthy LLM systems.",
+    "url": "https://dungtn.github.io/",
+    "image": "https://dungtn.github.io/photo.png",
+    "email": "mailto:thainjune@gmail.com",
+    "sameAs": [
+      "https://github.com/dungtn",
+      "https://linkedin.com/in/dung-thai",
+      "https://scholar.google.com/citations?user=WhMt_VAAAAAJ&hl=en"
+    ],
+    "knowsAbout": [
+      "Generative AI",
+      "Applied AI",
+      "Healthcare AI",
+      "Clinical NLP",
+      "Large Language Models",
+      "RAG",
+      "Hallucination Detection",
+      "LLM Safety",
+      "RLHF",
+      "DPO"
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-      <li><a href="/">First</a></li>
+    :root {
+      --bg: #fafaf8;
+      --surface: #ffffff;
+      --text: #1a1a18;
+      --muted: #6b6b65;
+      --accent: #2d5a8e;
+      --accent-light: #e8f0f9;
+      --border: #e4e4de;
+      --serif: 'Crimson Pro', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
 
-      {% for page in (1..paginator.total_pages) %}
-        {% if page == paginator.page %}
-          <li class="active"><a>{{ page }}<span class="sr-only">(current)</span></a></li>
-        {% elsif page == 1 %}
-          <li><a href="/">{{ page }}</a></li>
-        {% else %}
-          <li><a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a></li>
-        {% endif %}
-      {% endfor %}
+    html { scroll-behavior: smooth; }
 
-      <li><a href="/page/{{ paginator.total_pages }}/">Last</a></li>
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      font-size: clamp(14px, 0.35vw + 13px, 15px);
+      line-height: 1.7;
+    }
 
-      {% if paginator.next_page %}
-        <li><a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">&raquo;</a></li>
-      {% else %}
-        <li class="disabled"><span>&raquo;</span></li>
-      {% endif %}
-    </ul>
-  {% endif %}
-</div><!-- end #home -->
+    .layout {
+      display: grid;
+      grid-template-columns: 300px minmax(0, 1fr);
+      min-height: 100vh;
+      width: min(1240px, 100%);
+      margin: 0 auto;
+    }
+
+    aside {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 48px 28px 48px 36px;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      background: linear-gradient(180deg, #fdfdfb 0%, #fafaf8 100%);
+    }
+
+    .profile-header {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .profile-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .avatar-wrap {
+      width: 132px;
+      height: 132px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: var(--accent-light);
+      border: 3px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 22px rgba(23, 40, 58, 0.12);
+    }
+
+    .avatar-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 55%;
+      transform: scale(1.12);
+      display: block;
+    }
+
+    .avatar-placeholder {
+      font-family: var(--serif);
+      font-size: 38px;
+      color: var(--accent);
+      font-weight: 300;
+      line-height: 1;
+    }
+
+    .sidebar-name {
+      font-family: var(--serif);
+      font-size: 21px;
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--text);
+    }
+
+    .sidebar-title {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+      margin-top: 4px;
+    }
+
+    .sidebar-affil {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .sidebar-contact {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 13px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar-contact-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      color: #3a3a38;
+      line-height: 1.45;
+    }
+
+    .sidebar-contact-label {
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    .sidebar-contact a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .sidebar-contact a:hover {
+      text-decoration: underline;
+    }
+
+    nav { display: flex; flex-direction: column; gap: 2px; }
+
+    nav a {
+      font-size: 13.5px;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 5px 0 5px 10px;
+      border-left: 2px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    nav a:hover, nav a.active {
+      color: var(--accent);
+      border-left-color: var(--accent);
+    }
+
+    main {
+      padding: clamp(32px, 5vw, 56px) clamp(20px, 5vw, 56px) clamp(56px, 7vw, 80px);
+      max-width: none;
+      width: 100%;
+    }
+
+    section { margin-bottom: clamp(40px, 5vw, 56px); }
+
+    h2 {
+      font-family: var(--serif);
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 18px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    p { color: #3a3a38; margin-bottom: 12px; }
+    p:last-child { margin-bottom: 0; }
+    strong {
+      font-weight: 600;
+      color: var(--text);
+      text-shadow: none;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .bio { font-size: 15.5px; line-height: 1.8; }
+
+    .recruiter-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .action-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid #c5d9ee;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 12.5px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .action-pill:hover {
+      text-decoration: none;
+      background: #d8e8f5;
+      border-color: #9fc0e1;
+    }
+
+    .snapshot-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+      margin-bottom: 18px;
+    }
+
+    .snapshot-item {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--surface);
+      padding: 12px;
+    }
+
+    .snapshot-value {
+      font-family: var(--serif);
+      font-size: 24px;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .snapshot-label {
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+    }
+
+    .interest-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .chip {
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 12.5px;
+      padding: 4px 12px;
+      border-radius: 100px;
+      border: 1px solid #c5d9ee;
+    }
+
+    .skills-grid { display: flex; flex-direction: column; gap: 12px; }
+
+    .skill-row { display: grid; grid-template-columns: 130px 1fr; gap: 12px; align-items: baseline; }
+
+    .skill-label {
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+    }
+
+    .skill-tags { font-size: 13.5px; color: #3a3a38; line-height: 1.6; }
+
+    .pub-list { display: flex; flex-direction: column; gap: 20px; }
+
+    .pub-item {
+      padding: 16px 20px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--surface);
+      transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+    }
+
+    .pub-item:hover {
+      border-color: var(--accent);
+      box-shadow: 0 8px 20px rgba(23, 40, 58, 0.08);
+      transform: translateY(-1px);
+    }
+
+    .pub-venue {
+      font-size: 11.5px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .pub-title {
+      font-family: var(--serif);
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+
+    .pub-authors {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .pub-authors strong { color: var(--text); font-weight: 500; }
+
+    .pub-links { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .pub-link {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--accent);
+      border: 1px solid #c5d9ee;
+      padding: 2px 9px;
+      border-radius: 4px;
+      background: var(--accent-light);
+    }
+
+    .pub-link:hover { background: #d8e8f5; text-decoration: none; }
+
+    .exp-list { display: flex; flex-direction: column; gap: 30px; }
+
+    .exp-item { display: grid; grid-template-columns: 110px 1fr; gap: 16px; }
+
+    .exp-date { font-size: 12px; color: var(--muted); padding-top: 3px; font-weight: 300; }
+
+    .exp-role { font-weight: 500; font-size: 14.5px; color: var(--text); }
+    .exp-org  { font-size: 13px; color: var(--accent); margin-bottom: 2px; }
+    .exp-loc  { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+
+    .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+
+    .exp-bullets li {
+      font-size: 13.5px;
+      color: #3a3a38;
+      line-height: 1.6;
+      padding-left: 14px;
+      position: relative;
+    }
+
+    .exp-bullets li::before {
+      content: '◦';
+      position: absolute;
+      left: 0;
+      color: var(--muted);
+    }
+
+    .exp-bullets li strong { color: var(--text); font-weight: 500; }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .contact-card {
+      padding: 14px 18px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--surface);
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .contact-card:hover {
+      border-color: #c9d8e8;
+      box-shadow: 0 8px 18px rgba(23, 40, 58, 0.06);
+    }
+
+    .contact-label {
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 3px;
+    }
+
+    .contact-value { font-size: 13.5px; color: var(--text); }
+    .contact-value a { color: var(--accent); }
+
+    .recognition-list { display: flex; flex-direction: column; gap: 10px; }
+    .rec-item { font-size: 13.5px; color: #3a3a38; line-height: 1.6; padding-left: 14px; position: relative; }
+    .rec-item::before { content: '·'; position: absolute; left: 0; color: var(--muted); font-weight: 700; }
+
+    footer {
+      font-size: 12px;
+      color: var(--muted);
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 1024px) {
+      .layout {
+        grid-template-columns: 260px minmax(0, 1fr);
+      }
+
+      aside {
+        padding: 36px 18px 36px 22px;
+      }
+
+      .avatar-wrap {
+        width: 124px;
+        height: 124px;
+      }
+
+      nav a {
+        font-size: 13px;
+      }
+    }
+
+    @media (max-width: 1199px) {
+      .layout { grid-template-columns: 1fr; }
+      aside {
+        position: static;
+        top: auto;
+        height: auto;
+        overflow: visible;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 24px clamp(16px, 4vw, 24px);
+        gap: 18px;
+      }
+      main { padding-top: 28px; }
+      .profile-header {
+        flex-direction: row;
+        align-items: center;
+        gap: 14px;
+      }
+      .avatar-wrap {
+        width: 108px;
+        height: 108px;
+      }
+      nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 6px 12px;
+      }
+      nav a {
+        padding: 4px 0;
+        border-left: none;
+        border-bottom: 1px solid transparent;
+      }
+      nav a:hover, nav a.active {
+        border-left-color: transparent;
+        border-bottom-color: var(--accent);
+      }
+      .sidebar-contact {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px 16px;
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .snapshot-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .profile-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .sidebar-contact {
+        display: flex;
+        grid-template-columns: none;
+        gap: 8px;
+      }
+      .exp-item { grid-template-columns: 1fr; gap: 4px; }
+      .skill-row { grid-template-columns: 1fr; gap: 4px; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .pub-item { padding: 14px 14px; }
+      .pub-title { font-size: 15px; }
+      .exp-bullets li,
+      .skill-tags,
+      .contact-value,
+      .rec-item { font-size: 13px; }
+      .sidebar-contact {
+        font-size: 12.5px;
+        gap: 8px;
+        padding-bottom: 8px;
+      }
+      .avatar-wrap {
+        width: 104px;
+        height: 104px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .recruiter-actions { gap: 8px; }
+      .action-pill { font-size: 12px; }
+      h2 {
+        font-size: 22px;
+        margin-bottom: 14px;
+      }
+      .sidebar-name { font-size: 18px; }
+      .bio { font-size: 14.5px; line-height: 1.75; }
+      .chip { font-size: 12px; padding: 4px 10px; }
+      .snapshot-value { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="layout">
+
+  <aside id="sidebar">
+    <div class="profile-header">
+      <div class="avatar-wrap">
+        <!-- Replace with: <img src="photo.jpg" alt="Dung Thai"> -->
+        <img src="photo.png" alt="June Thai">
+        <!-- <span class="avatar-placeholder">JT</span> -->
+      </div>
+
+      <div class="profile-text">
+        <div class="sidebar-name">June Thai, Ph.D.</div>
+        <div class="sidebar-title">Staff Research Scientist</div>
+        <div class="sidebar-affil">San Jose, CA</div>
+      </div>
+    </div>
+
+    <nav>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#publications">Publications</a>
+      <a href="#education">Education</a>
+      <a href="#recognition">Recognition &amp; Service</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="sidebar-contact">
+      <div class="sidebar-contact-item">
+        <div class="sidebar-contact-label">Email</div>
+        <a href="mailto:thainjune@gmail.com">thainjune@gmail.com</a>
+      </div>
+      <div class="sidebar-contact-item">
+        <div class="sidebar-contact-label">Google Scholar</div>
+        <a href="https://scholar.google.com/citations?user=WhMt_VAAAAAJ&hl=en" target="_blank">View profile</a>
+      </div>
+      <div class="sidebar-contact-item">
+        <div class="sidebar-contact-label">GitHub</div>
+        <a href="https://github.com/dungtn" target="_blank">github.com/dungtn</a>
+      </div>
+      <div class="sidebar-contact-item">
+        <div class="sidebar-contact-label">LinkedIn</div>
+        <a href="https://linkedin.com/in/dung-thai" target="_blank">linkedin.com/in/dung-thai</a>
+      </div>
+      <div class="sidebar-contact-item">
+        <div class="sidebar-contact-label">CV</div>
+        <a href="resume.pdf" target="_blank">Download resume</a>
+      </div>
+    </div>
+  </aside>
+
+  <main>
+
+    <section id="about">
+      <h2>About Me</h2>
+      <div class="recruiter-actions">
+        <a class="action-pill" href="resume.pdf" target="_blank">Download CV</a>
+        <a class="action-pill" href="mailto:thainjune@gmail.com">Email</a>
+        <a class="action-pill" href="https://linkedin.com/in/dung-thai" target="_blank">LinkedIn</a>
+        <a class="action-pill" href="https://scholar.google.com/citations?user=WhMt_VAAAAAJ&hl=en" target="_blank">Google Scholar</a>
+      </div>
+      <div class="bio">
+        <p>
+          I am a Research Scientist with 8+ years of experience building NLP and generative AI systems — from foundational research to production deployment in healthcare. I hold a Ph.D. in Computer Science from the <a href="https://www.umass.edu" target="_blank">University of Massachusetts Amherst</a>, advised by <a href="https://people.cs.umass.edu/~mccallum/" target="_blank">Prof. Andrew McCallum</a>.
+        </p>
+        <p>
+          My work centers on <strong>trustworthy and safe AI</strong> — building systems that are factually grounded, clinically reliable, and rigorously evaluable. I have a strong track record of taking research from formulation to production, including two deployed clinical AI systems at Ensemble Health Partners and Mendel AI.
+        </p>
+        <p>
+          I have 15+ publications at EMNLP, NAACL, KDD, and ICML, hold 2 US patents, and am an experienced reviewer at NeurIPS, ICLR, SIGIR, and ARR.
+        </p>
+      </div>
+      <div class="snapshot-grid">
+        <div class="snapshot-item">
+          <div class="snapshot-value">8+ yrs</div>
+          <div class="snapshot-label">Industry + Research</div>
+        </div>
+        <div class="snapshot-item">
+          <div class="snapshot-value">15+</div>
+          <div class="snapshot-label">Publications</div>
+        </div>
+        <div class="snapshot-item">
+          <div class="snapshot-value">2</div>
+          <div class="snapshot-label">US Patents</div>
+        </div>
+        <div class="snapshot-item">
+          <div class="snapshot-value">2</div>
+          <div class="snapshot-label">Deployed Clinical AI Systems</div>
+        </div>
+      </div>
+      <div class="interest-chips">
+        <span class="chip">Large Language Models</span>
+        <span class="chip">RAG</span>
+        <span class="chip">Agentic AI Systems</span>
+        <span class="chip">Hallucination Detection</span>
+        <span class="chip">Clinical AI</span>
+        <span class="chip">RLHF / DPO</span>
+        <span class="chip">Information Extraction</span>
+        <span class="chip">Knowledge Graphs</span>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2>Technical Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-row">
+          <div class="skill-label">ML / AI</div>
+          <div class="skill-tags">Large Language Models, Agentic AI Systems, RAG, Hallucination Detection &amp; Mitigation, RLHF, DPO, LoRA / QLoRA / PEFT, LLM Pre-training &amp; Fine-tuning, Representation Learning, Sequence Labeling, Knowledge Graphs</div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label">Frameworks</div>
+          <div class="skill-tags">PyTorch, HuggingFace Transformers, vLLM, Unsloth, TRL, LangChain, Weights &amp; Biases, Ray, Docker, Git, Cursor, GitHub Copilot</div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label">Clinical AI</div>
+          <div class="skill-tags">Clinical NLP, Medical Text Summarization, Hallucination Mitigation in Healthcare, Clinical Trial Matching, Revenue Cycle Management (RCM), MIMIC-IV, HealthBench</div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label">Languages</div>
+          <div class="skill-tags">Python (primary), Java, C++, R</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <h2>Experience</h2>
+      <div class="exp-list">
+
+        <div class="exp-item">
+          <div class="exp-date">Jul 2024 – Present</div>
+          <div>
+            <div class="exp-role">Staff Research Scientist</div>
+            <div class="exp-org">Ensemble Health Partners</div>
+            <div class="exp-loc">San Jose, CA</div>
+            <ul class="exp-bullets">
+              <li><strong>Virtual Utilization Review (VUR):</strong> Designed and built a novel clinical AI system from scratch for real-time utilization review — a task with no public benchmark. Defined task formulation, evaluation criteria, and modeling approach end-to-end. Deployed to production via Azure ML; improved pipeline F1 by <strong>9.54%</strong> over internal baseline through iterative error analysis.</li>
+              <li><strong>Insurance Appeal Generation:</strong> Built LLM pipelines combining RAG, self-refinement, and DPO to generate appeal letters grounded in clinical evidence, ICD/CPT coding, and payer-specific justification requirements; applied hallucination mitigation to reduce factual errors in generated clinical content.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-date">Nov 2023 – Jul 2024</div>
+          <div>
+            <div class="exp-role">Senior → Staff Research Scientist</div>
+            <div class="exp-org">Mendel AI</div>
+            <div class="exp-loc">San Jose, CA</div>
+            <ul class="exp-bullets">
+              <li><strong>Hallucination Detection &amp; Mitigation:</strong> Built a detection framework outperforming prior SOTA by <strong>2.3–4.8%</strong>; used detection signals to drive LLM self-refinement and preference learning (DPO), achieving end-to-end mitigation of factual errors in clinical summarization.</li>
+              <li><strong>Clinical Text Summarization:</strong> Developed a semi-parametric memory mechanism allowing LLMs to reason across longitudinal patient records beyond context-window limits, targeting reconciliation of conflicting medical events over time.</li>
+              <li><strong>Clinical Trial Matching (ACR benchmark, BioKDD 2024):</strong> Co-developed a neuro-symbolic hybrid pipeline for large-scale cohort retrieval; outperformed pure LLM baselines (including GPT-4) by <strong>10.1–26.7% F1</strong> on 1,400 patients across 113 complex oncology queries.</li>
+              <li>Conducted continued pre-training of Llama 3 (8B and 70B) on proprietary clinical corpora; fine-tuned for downstream medical summarization and clinical event extraction.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-date">Aug 2016 – Nov 2023</div>
+          <div>
+            <div class="exp-role">Research Assistant (Ph.D.)</div>
+            <div class="exp-org">UMass Amherst — IESL Group</div>
+            <div class="exp-loc">Amherst, MA</div>
+            <ul class="exp-bullets">
+              <li><strong>Case-Based Reasoning for NLP:</strong> Introduced CBR-iKB, the first non-parametric CBR framework for knowledge-base QA — surpassed prior SOTA by <strong>22.3% on WebQSP</strong>. Extended to unstructured text (CBR-MRC, EMNLP 2023), outperforming baselines by +11.5 EM on NaturalQuestions and +8.4 EM on NewsQA.</li>
+              <li><strong>Tabular Representation Learning (TABBIE, NAACL 2021):</strong> Co-developed a dual-Transformer model for tabular data using an ELECTRA-inspired corrupt-cell detection objective; achieved SOTA on column population (MAP 37.9 vs. TaBERT's 33.1) while requiring <strong>10× less compute</strong> than TaBERT.</li>
+              <li><strong>Internships:</strong> Adobe Research (2017, 2018) — tabular QA and document understanding; IBM Research (2020, 2021) — knowledge-base QA and semantic parsing.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>Independent Projects</h2>
+      <div class="pub-list">
+        <div class="pub-item">
+          <div class="pub-venue">Open Source · 2025</div>
+          <div class="pub-title">AppealGen: Agentic Workflow for Grounded Clinical Appeal Generation</div>
+          <div class="pub-authors">Python · vLLM · Google MedGemma · MIMIC-IV · HealthBench</div>
+          <p style="font-size:13.5px; color:#3a3a38; margin-bottom:10px; line-height:1.6; margin-top:6px;">
+            Built as a submission to the Kaggle MedGemma Impact Challenge — an open-source agentic toolkit for generating clinically grounded insurance appeal letters. Implements a multi-step agentic workflow for evidence retrieval, clinical reasoning, and structured letter generation, with a HealthBench-compatible rubric for benchmarking across accuracy, grounding, and safety axes on MIMIC-IV claims data.
+          </p>
+          <div class="pub-links">
+            <a class="pub-link" href="https://github.com/dungtn" target="_blank">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="publications">
+      <h2>Selected Publications &amp; Patents</h2>
+      <div class="pub-list">
+
+        <div class="pub-item">
+          <div class="pub-venue">KDD Workshop on AI &amp; Data Science for Healthcare · 2024</div>
+          <div class="pub-title">Faithfulness Hallucination Detection in Healthcare AI</div>
+          <div class="pub-authors"><strong>D.N. Thai</strong> et al. &nbsp;·&nbsp; First author</div>
+          <div class="pub-links"><a class="pub-link" href="https://scholar.google.com" target="_blank">Google Scholar</a></div>
+        </div>
+
+        <div class="pub-item">
+          <div class="pub-venue">BioKDD @ KDD · 2024</div>
+          <div class="pub-title">ACR: A Benchmark for Automatic Cohort Retrieval</div>
+          <div class="pub-authors"><strong>D.N. Thai</strong> et al. &nbsp;·&nbsp; First author</div>
+          <div class="pub-links"><a class="pub-link" href="https://scholar.google.com" target="_blank">Google Scholar</a></div>
+        </div>
+
+        <div class="pub-item">
+          <div class="pub-venue">Findings of ACL: EMNLP · 2023</div>
+          <div class="pub-title">Machine Reading Comprehension Using Case-Based Reasoning</div>
+          <div class="pub-authors"><strong>D. Thai</strong> et al. &nbsp;·&nbsp; First author</div>
+          <div class="pub-links"><a class="pub-link" href="https://scholar.google.com" target="_blank">Google Scholar</a></div>
+        </div>
+
+        <div class="pub-item">
+          <div class="pub-venue">EMNLP · 2021</div>
+          <div class="pub-title">Case-Based Reasoning for Natural Language Queries over Knowledge Bases</div>
+          <div class="pub-authors">R. Das, M. Zaheer, <strong>D. Thai</strong> et al. &nbsp;·&nbsp; Co-first author</div>
+          <div class="pub-links"><a class="pub-link" href="https://scholar.google.com" target="_blank">Google Scholar</a></div>
+        </div>
+
+        <div class="pub-item">
+          <div class="pub-venue">NAACL-HLT · 2021</div>
+          <div class="pub-title">TABBIE: Pretrained Representations of Tabular Data</div>
+          <div class="pub-authors">H. Iida, <strong>D. Thai</strong> et al. &nbsp;·&nbsp; Co-first author</div>
+          <div class="pub-links"><a class="pub-link" href="https://scholar.google.com" target="_blank">Google Scholar</a></div>
+        </div>
+
+        <div class="pub-item">
+          <div class="pub-venue">US Patents · 2022 &amp; 2024</div>
+          <div class="pub-title">Semantic Reasoning for Tabular Question Answering &amp; Related Work</div>
+          <div class="pub-authors"><strong>D. Thai</strong> et al. &nbsp;·&nbsp; US Patent 17/317,052 · US Patent 17/930,288</div>
+        </div>
+
+      </div>
+      <p style="margin-top:16px; font-size:13px; color:var(--muted);">Full list available on <a href="https://scholar.google.com" target="_blank">Google Scholar →</a></p>
+    </section>
+
+    <section id="education">
+      <h2>Education</h2>
+      <div class="exp-list">
+        <div class="exp-item">
+          <div class="exp-date">2016 – 2024</div>
+          <div>
+            <div class="exp-role">Ph.D. in Computer Science</div>
+            <div class="exp-org">University of Massachusetts Amherst</div>
+            <div class="exp-loc">Amherst, MA &nbsp;·&nbsp; GPA: 3.83 / 4.00</div>
+            <div style="font-size:13.5px; color:#3a3a38;">Advisor: Prof. Andrew McCallum</div>
+          </div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-date">2014</div>
+          <div>
+            <div class="exp-role">M.S. / B.E. in Computer Science &amp; Engineering</div>
+            <div class="exp-org">Vietnam National University</div>
+            <div class="exp-loc">Ho Chi Minh City, Vietnam &nbsp;·&nbsp; Thesis: 10/10</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="recognition">
+      <h2>Recognition &amp; Service</h2>
+      <div class="recognition-list">
+        <div class="rec-item"><strong>Vietnam Education Foundation (VEF) Fellowship (2015)</strong> — U.S. Congress-funded; one of 34 fellows selected from a competitive, merit-based program (~2–3% acceptance rate) supporting outstanding Vietnamese scholars in STEM.</div>
+        <div class="rec-item"><strong>Reviewer:</strong> NeurIPS, ICLR, SIGIR, ACL Rolling Review (ARR)</div>
+        <div class="rec-item"><strong>Organizing / Program Committee:</strong> Spa-NLP Workshop @ ACL 2022; SUKI Workshop @ NAACL 2022</div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p style="margin-bottom:18px; color:var(--muted);">Feel free to reach out about research, collaborations, or opportunities.</p>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="contact-label">Email</div>
+          <div class="contact-value"><a href="mailto:thainjune@gmail.com">thainjune@gmail.com</a></div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-label">Phone</div>
+          <div class="contact-value"><a href="tel:+16692333660">+1-669-233-3660</a></div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-label">Google Scholar</div>
+          <div class="contact-value"><a href="https://scholar.google.com" target="_blank">View Profile →</a></div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-label">GitHub</div>
+          <div class="contact-value"><a href="https://github.com/dungtn" target="_blank">github.com/dungtn →</a></div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2026 Dung (June) Thai</p>
+    </footer>
+
+  </main>
+</div>
+
+<script>
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav a');
+
+  function setActiveNavLink(sectionId) {
+    navLinks.forEach(link => link.classList.remove('active'));
+    const active = document.querySelector(`nav a[href="#${sectionId}"]`);
+    if (active) active.classList.add('active');
+  }
+
+  function updateActiveSection() {
+    const offset = Math.max(140, window.innerHeight * 0.28);
+    const scrollPosition = window.scrollY + offset;
+    let currentSection = sections[0];
+
+    const nearPageBottom =
+      window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+
+    if (nearPageBottom) {
+      const hashId = window.location.hash ? window.location.hash.slice(1) : '';
+      const hashSection = hashId ? document.getElementById(hashId) : null;
+      if (hashSection) {
+        setActiveNavLink(hashSection.id);
+        return;
+      }
+      currentSection = sections[sections.length - 1];
+      setActiveNavLink(currentSection.id);
+      return;
+    }
+
+    sections.forEach(section => {
+      if (section.offsetTop <= scrollPosition) currentSection = section;
+    });
+
+    if (currentSection) setActiveNavLink(currentSection.id);
+  }
+
+  window.addEventListener('scroll', updateActiveSection, { passive: true });
+  window.addEventListener('hashchange', updateActiveSection);
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      setActiveNavLink(href.slice(1));
+    });
+  });
+
+  window.addEventListener('load', updateActiveSection);
+  updateActiveSection();
+</script>
+</body>
+</html>
